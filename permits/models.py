@@ -27,6 +27,7 @@ class ContactProfile(models.Model):
     employer = models.ForeignKey('SubProfile', on_delete=models.CASCADE, null=True, blank=True)
     experience = models.TextField(blank=True)
     dob = models.DateField()
+    cdl = models.ImageField(upload_to='contact_cdl', blank=True)
     note = models.TextField(blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -107,11 +108,6 @@ class AgencyProfile(models.Model):
         return self.name
 
 
-# TODO   add image function to all classes
-# TODO CDL pictures
-# TODO Vehicle pictures
-
-
 class VehicleProfile(models.Model):
     ENGINE_CHOICES = (
         (8, '8 Cylinder'),
@@ -153,7 +149,7 @@ class VehicleProfile(models.Model):
         choices=EQUIPMENT_CHOICES,
     )
     description = models.CharField(max_length=150)
-    attached_to = models.CharField(max_length=150)
+    attached_to = models.CharField(max_length=150, blank=True)
     status = models.CharField(
         max_length=1,
         choices=STATUS_CHOICES,
@@ -181,7 +177,7 @@ class VehicleProfile(models.Model):
     )
     front_size = models.CharField(max_length=150)
     rear_size = models.CharField(max_length=150)
-    image = models.FileField(upload_to='image/', blank=True)
+    veh_picture = models.ImageField(upload_to='veh_images', blank=True)
     owner = models.ForeignKey(SubProfile, on_delete=models.CASCADE)
     driver = models.ForeignKey(ContactProfile, on_delete=models.CASCADE)
     note = models.TextField(blank=True)
@@ -204,7 +200,7 @@ class PermitProfile(models.Model):
     valid_to = models.DateField()
     permit_class = models.CharField(max_length=150)
     eq_number = models.ForeignKey(VehicleProfile, on_delete=models.CASCADE)
-    pdf = models.FileField(upload_to='pdfs/', blank=True)
+    pdf = models.FileField(upload_to='permit_pdf', blank=True)
     note = models.TextField(blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
