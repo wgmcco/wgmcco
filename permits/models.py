@@ -107,6 +107,11 @@ class AgencyProfile(models.Model):
         return self.name
 
 
+# TODO   add image function to all classes
+# TODO CDL pictures
+# TODO Vehicle pictures
+
+
 class VehicleProfile(models.Model):
     ENGINE_CHOICES = (
         (8, '8 Cylinder'),
