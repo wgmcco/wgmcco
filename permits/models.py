@@ -91,7 +91,7 @@ class InsuranceProfile(models.Model):
 
 class AgencyProfile(models.Model):
     name = models.CharField(max_length=150, unique=True)
-    point_name = models.ForeignKey(ContactProfile, on_delete=models.CASCADE)
+    point_name = models.ManyToManyField(ContactProfile)
     address = models.CharField(max_length=150)
     city = models.CharField(max_length=150)
     st = models.CharField(max_length=150)
@@ -200,7 +200,7 @@ class PermitProfile(models.Model):
     valid_to = models.DateField()
     permit_class = models.CharField(max_length=150)
     eq_number = models.ForeignKey(VehicleProfile, on_delete=models.CASCADE)
-    pdf = models.FileField(upload_to='permit_pdf', blank=True)
+    pdf = models.FileField('PDF', upload_to='permit_pdf', blank=True)
     note = models.TextField(blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -211,3 +211,5 @@ class PermitProfile(models.Model):
     def delete(self, *args, **kwargs):
         self.pdf.delete()
         super().delete(*args, **kwargs)
+
+
