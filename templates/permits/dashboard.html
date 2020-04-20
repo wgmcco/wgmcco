@@ -1,0 +1,37 @@
+{% extends 'permits/main.html' %}
+
+{% block content %}
+
+    <div class="container">
+        <h2>Equipment</h2>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Equipment #</th>
+                <th>Model</th>
+                <th>Year</th>
+                <th>License</th>
+                <th>Vin</th>
+                <th>Type</th>
+                <th>Driver</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                {% for i in trucks %}
+                    <td><a href="{% url 'truck' %}">{{ i.eq_number }}</a></td>
+                    <td>{{ i.model }}</td>
+                    <td>{{ i.year }}</td>
+                    <td>{{ i.lic }}</td>
+                    <td>{{ i.vin }}</td>
+                    <td>{{ i.get_veh_type_display }}</td>
+                    <td><a href="{% url 'contact' %}">{{ i.driver }}</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+
+{% endblock %}

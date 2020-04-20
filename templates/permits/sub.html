@@ -1,0 +1,12 @@
+{% extends 'permits/main.html' %}
+
+{% block content %}
+
+<p>SUB Page</p>
+
+    {% for i in subs %}
+        {{i.name}}
+        {{i.ein_ss }}
+    {% endfor %}
+
+{% endblock %}
